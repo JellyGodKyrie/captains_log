@@ -65,10 +65,21 @@ app.get('/logs/:id', async (req, res) => {
 })
 
 // DELETE - Backend only funcitonality* --> used to delete a fruit
+app.delete('/logs/:id', async (req, res) => {
+    try {
+        await CaptainsLog.findOneAndDelete({'_id': req.params.id})
+            .then(() => {
+                res.redirect('/logs')
+            })
+    } catch (error) {
+        res.status(400).send({ message: error.message })
+    }
+})
 
 // EDIT - Shows a form that lets you edit the fruit (connects to the UPDATE or DELETE route)
 
 // UPDATE - Backend only functionality* --> used to update a fruit
+
 
 app.listen(PORT, () => {
     console.log(`The Port at ${PORT} is open`)
