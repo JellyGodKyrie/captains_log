@@ -77,6 +77,16 @@ app.delete('/logs/:id', async (req, res) => {
 })
 
 // EDIT - Shows a form that lets you edit the fruit (connects to the UPDATE or DELETE route)
+app.get('/logs/:id/edit', async (req,res) => {
+    try {
+        const foundLog = await CaptainsLog.findOne({'_id': req.params.id})
+        res.render('logs/Edit', {
+            log: foundLog
+        })
+    } catch (error) {
+        res.status(400).send({ message: error.message })
+    }
+})
 
 // UPDATE - Backend only functionality* --> used to update a fruit
 

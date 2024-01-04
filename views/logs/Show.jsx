@@ -10,13 +10,6 @@ function Show(props) {
                 Entry : {props.log.entry} <br />
                 Is The Ship Broken? : {props.log.shipIsBroken? 'The ship is broken': "The ship is not broken"}
             </p>
-            {/* <div>
-                <a href={`/logs/${props.log._id}/edit`}>
-                    <button>
-                        {`Edit log: ${props.log.title}`}
-                    </button>
-                </a>
-            </div> */}
         </div>
     )
 }
