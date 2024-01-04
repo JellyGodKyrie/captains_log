@@ -89,7 +89,22 @@ app.get('/logs/:id/edit', async (req,res) => {
 })
 
 // UPDATE - Backend only functionality* --> used to update a fruit
-
+app.put('/logs/:id', async (req, res) => {
+    if (req.body.shipIsBroken === 'on') {
+        req.body.shipIsBroken = true
+    } else {
+        req.body.shipIsBroken = false
+    }
+    try {
+        await CaptainsLog.findByIdAndUpdate({ '_id': req.params.id },
+            req.body, { new: true })
+            .then(() => {
+                res.redirect(`/logs`)
+            })
+    } catch (error) {
+        res.status(400).send({ message: error.message })
+    }
+})
 
 app.listen(PORT, () => {
     console.log(`The Port at ${PORT} is open`)
